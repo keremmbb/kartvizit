@@ -14,7 +14,7 @@
             --bg-light: #f4f7f9;
         }
 
-        /* Giriş Efekti Tanımları */
+        /* Giriş Efekti */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -28,7 +28,7 @@
 
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
-            background-color: var(--bg-light);
+            background: linear-gradient(135deg, #f4f7f9 0%, #e1e5ea 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -41,20 +41,28 @@
             width: 90%;
             max-width: 380px;
             border-radius: 25px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             overflow: hidden;
             text-align: center;
             margin: 20px 0;
-            
-            /* Animasyonu Buraya Ekledik */
             animation: fadeInUp 0.8s ease-out forwards;
+            /* Kartın genel geçiş efekti */
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+        }
+
+        /* Kartın üzerine gelince hafifçe yükselmesi */
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
 
         .header {
             background-color: var(--primary-blue);
             padding: 40px 20px;
             color: white;
+            position: relative;
         }
+        
         .company-name { font-weight: bold; letter-spacing: 2px; margin-bottom: 10px; font-size: 20px; }
         .user-name { font-size: 26px; margin: 15px 0 5px 0; }
         .title { font-style: italic; opacity: 0.9; font-size: 16px; }
@@ -70,7 +78,16 @@
             font-size: 14px; 
             line-height: 1.4;
             gap: 12px;
+            padding: 8px;
+            border-radius: 10px;
+            transition: background 0.3s ease;
         }
+
+        /* Adres satırına hover efekti */
+        .info-row:hover {
+            background-color: #f8f9fa;
+        }
+
         .svg-icon {
             width: 20px;
             height: 20px;
@@ -79,6 +96,7 @@
         }
         
         .actions { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+        
         .btn {
             display: flex;
             align-items: center;
@@ -88,20 +106,42 @@
             border-radius: 14px;
             text-decoration: none;
             font-weight: bold;
-            transition: 0.3s;
             border: none;
             cursor: pointer;
             font-size: 16px;
             color: white;
+            /* Akıcı animasyon için transition */
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .btn svg { fill: white; width: 22px; height: 22px; }
+
+        .btn svg { 
+            fill: white; 
+            width: 22px; 
+            height: 22px; 
+            transition: transform 0.3s ease;
+        }
         
+        /* HOVER (Üstüne gelme) EFEKTLERİ */
+        .btn:hover {
+            transform: scale(1.05); /* %5 büyüme */
+            filter: brightness(1.1); /* Rengi hafif açar */
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        }
+
+        /* Hover durumunda ikonu hareketlendir */
+        .btn:hover svg {
+            transform: rotate(-10deg) scale(1.1);
+        }
+
+        /* Tıklama anı (Active) efekti */
+        .btn:active {
+            transform: scale(0.96);
+        }
+
         .btn-save { background-color: var(--primary-blue); }
         .btn-whatsapp { background-color: var(--whatsapp-green); }
         .btn-call { background-color: var(--phone-blue); }
         .btn-mail { background-color: var(--email-orange); }
-
-        .btn:active { transform: scale(0.98); opacity: 0.9; }
         
         .footer-logo { margin-top: 20px; font-size: 11px; color: #999; }
     </style>
