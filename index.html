@@ -72,7 +72,6 @@
             overflow: hidden;
         }
 
-        /* --- ÜSTTEKİ DÖNME İKONLARI --- */
         .flip-icon-top {
             position: absolute;
             top: 20px;
@@ -112,38 +111,36 @@
             z-index: 20; 
         }
         
-        /* --- EKSTRA YUMUŞATILMIŞ BUTONLAR --- */
+        /* --- YUMUŞATILMIŞ VE %5 BÜYÜYEN BUTONLAR --- */
         .btn {
             display: flex; align-items: center; justify-content: center; gap: 12px;
             padding: 14px; border-radius: 16px; text-decoration: none; font-weight: 600;
             color: white; border: none; font-size: 14px; 
             
-            /* SÜRE UZATILDI (0.6s) VE EĞRİ DEĞİŞTİ */
-            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), 
-                        box-shadow 0.6s cubic-bezier(0.23, 1, 0.32, 1), 
-                        filter 0.6s ease; 
+            /* Yumuşak geçiş süresi */
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                        box-shadow 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                        filter 0.3s ease; 
             
             opacity: 0;
             animation: itemFadeIn 0.5s ease forwards;
             cursor: pointer;
             position: relative;
             transform: scale(1);
-            transform-origin: center; /* Büyüme merkezden dışa doğru olur */
-            backface-visibility: hidden;
             will-change: transform;
         }
 
-        /* YUMUŞAK VE ELASTİK BÜYÜME */
+        /* %5 Büyüme (1.05) */
         .actions .btn:hover { 
-            transform: scale(1.10) !important; 
-            filter: brightness(1.1); 
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2); 
+            transform: scale(1.05) !important; 
+            filter: brightness(1.08); 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
             z-index: 50;
         }
 
         .btn:active {
-            transform: scale(0.94) !important;
-            transition: transform 0.2s ease;
+            transform: scale(0.97) !important;
+            transition: transform 0.1s ease;
         }
         
         .btn:nth-child(1) { animation-delay: 0.4s; }
@@ -160,7 +157,6 @@
         .btn-mail { background-color: var(--email-orange); }
         .btn-linkedin { background-color: var(--linkedin-blue); }
 
-        /* --- ARKA YÜZ --- */
         .card-back {
             transform: rotateY(180deg);
             background: linear-gradient(180deg, #ffffff 0%, #f1f4f8 100%);
@@ -199,15 +195,12 @@
             border-radius: 18px;
             border: 1.5px solid #d1d9e6;
             text-decoration: none;
-            /* Bilgi kartları geçişi de yumuşatıldı */
-            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), 
-                        background 0.5s ease, 
-                        border-color 0.5s ease;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s ease;
         }
 
         .info-card:hover {
             background: #ffffff;
-            transform: translateX(10px);
+            transform: translateX(8px);
             border-color: var(--primary-blue);
         }
 
@@ -274,7 +267,7 @@
                 <img src="indir.jpg" alt="Hedef Bilgisayar Logo" class="company-logo">
                 
                 <div class="info-list">
-                    <a href="https://www.google.com/maps?q=Rasimpaşa+Mah.+Nemlizade+Sk.+No:2+Kadıköy+İstanbul" target="_blank" class="info-card" onclick="event.stopPropagation()">
+                    <a href="https://maps.google.com" target="_blank" class="info-card" onclick="event.stopPropagation()">
                         <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
                         <div class="info-text">
                             <span class="info-label">ADRES (HARİTADA GÖR)</span>
