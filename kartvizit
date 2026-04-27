@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Görkem Yağız YAŞIK - Dijital Kartvizit</title>
+    <style>
+        :root {
+            --primary-blue: #2E3192; /* Karttaki lacivert tonu */
+            --text-dark: #333;
+            --bg-light: #f4f7f9;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--bg-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            width: 90%;
+            max-width: 380px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            overflow: hidden;
+            text-align: center;
+        }
+        .header {
+            background-color: var(--primary-blue);
+            padding: 40px 20px;
+            color: white;
+        }
+        .company-name { font-weight: bold; letter-spacing: 2px; margin-bottom: 10px; font-size: 20px; }
+        .user-name { font-size: 26px; margin: 15px 0 5px 0; }
+        .title { font-style: italic; opacity: 0.9; font-size: 16px; }
+        
+        .content { padding: 30px 20px; }
+        .info-row { margin-bottom: 15px; color: var(--text-dark); font-size: 15px; line-height: 1.4; }
+        
+        .actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+        .btn {
+            padding: 15px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn-save { background-color: var(--primary-blue); color: white; }
+        .btn-call { background-color: #28a745; color: white; }
+        .btn-mail { background-color: #e7e7e7; color: var(--text-dark); }
+        
+        .footer-logo { margin-top: 20px; font-size: 12px; color: #999; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="header">
+        <div class="company-name">HEDEF BİLGİSAYAR</div>
+        <h1 class="user-name">Görkem Yağız YAŞIK</h1>
+        <div class="title">Proje Yetkilisi</div>
+    </div>
+
+    <div class="content">
+        <div class="info-row">
+            <strong>📍 Adres:</strong><br>
+            Rasimpaşa Mah. Nemlizade Sk. No:2 K:1 D:2 Kadıköy - İSTANBUL
+        </div>
+        
+        <div class="actions">
+            <button class="btn btn-save" onclick="downloadVCard()">👤 REHBERE KAYDET</button>
+            <a href="tel:+905059813325" class="btn btn-call">📞 GSM: 0505 981 33 25</a>
+            <a href="mailto:gorkem.yagiz@hedefltd.com" class="btn btn-mail">📧 E-Posta Gönder</a>
+        </div>
+
+        <div class="footer-logo">
+            Hedef Bilgisayar Sistemleri Kablolama San. ve Tic. Ltd. Şti.
+        </div>
+    </div>
+</div>
+
+<script>
+function downloadVCard() {
+    const vcard = "BEGIN:VCARD\n" +
+                  "VERSION:3.0\n" +
+                  "FN:Görkem Yağız YAŞIK\n" +
+                  "ORG:Hedef Bilgisayar Sistemleri\n" +
+                  "TITLE:Proje Yetkilisi\n" +
+                  "TEL;TYPE=CELL:+905059813325\n" +
+                  "TEL;TYPE=WORK:02165451498\n" +
+                  "EMAIL:gorkem.yagiz@hedefltd.com\n" +
+                  "ADR;TYPE=WORK:;;Rasimpaşa Mah. Nemlizade Sk. No:2 K:1 D:2;Kadıköy;İSTANBUL;;\n" +
+                  "END:VCARD";
+
+    const blob = new Blob([vcard], { type: "text/vcard" });
+    const url = window.URL.createObjectURL(blob);
+    const newLink = document.createElement("a");
+    newLink.href = url;
+    newLink.setAttribute("download", "GorkemYagizYASIK.vcf");
+    document.body.appendChild(newLink);
+    newLink.click();
+    document.body.removeChild(newLink);
+}
+</script>
+
+</body>
+</html>
