@@ -103,26 +103,36 @@
         }
         .user-name { font-size: 26px; margin: 10px 0; font-weight: 700; }
         .content { padding: 20px 25px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
-        .actions { display: flex; flex-direction: column; gap: 12px; }
+        
+        /* HOVER'IN ÇALIŞMASI İÇİN BURASI ÖNEMLİ */
+        .actions { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; 
+            position: relative;
+            z-index: 20; /* Butonların tıklanabilirliğini garantiler */
+        }
         
         /* --- BUTONLAR VE HOVER EFEKTİ --- */
         .btn {
             display: flex; align-items: center; justify-content: center; gap: 12px;
             padding: 14px; border-radius: 16px; text-decoration: none; font-weight: 600;
             color: white; border: none; font-size: 14px; 
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            /* Transition iyileştirildi */
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, filter 0.3s ease; 
             opacity: 0;
             animation: itemFadeIn 0.5s ease forwards;
             cursor: pointer;
             position: relative;
+            transform: scale(1);
         }
 
-        /* İSTEDİĞİNİZ %10 HOVER BÜYÜMESİ */
-        .btn:hover { 
-            transform: scale(1.10) translateY(-3px); 
+        /* %10 HOVER BÜYÜMESİ - CSS Seçicisi güçlendirildi */
+        .actions .btn:hover { 
+            transform: scale(1.10) translateY(-3px) !important; 
             filter: brightness(1.1); 
             box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
-            z-index: 5;
+            z-index: 50; /* Hover anında üstte görünmesi için */
         }
 
         .btn:active {
@@ -206,7 +216,7 @@
 <body>
 
 <div class="wrapper">
-    <div class="card-container" id="card" onclick="triggerHaptic(); toggleFlip();">
+    <div class="card-container" id="card" onclick="handleCardClick(event)">
         
         <div class="card-face card-front">
             <div class="header">
@@ -290,6 +300,15 @@
         if ("vibrate" in navigator) {
             navigator.vibrate(15);
         }
+    }
+
+    function handleCardClick(event) {
+        // Eğer tıklanan eleman bir buton veya link ise kartı döndürme
+        if (event.target.closest('.btn') || event.target.closest('.info-card')) {
+            return;
+        }
+        triggerHaptic();
+        toggleFlip();
     }
 
     function toggleFlip() {
