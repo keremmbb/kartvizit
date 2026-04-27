@@ -15,11 +15,11 @@
             --bg-light: #f4f7f9;
         }
 
-        /* Giriş Efekti (Daha yavaş ve süzülerek) */
+        /* Çok daha yavaş ve dramatik giriş efekti */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(60px);
+                transform: translateY(120px); /* Daha aşağıdan başlar */
             }
             to {
                 opacity: 1;
@@ -27,7 +27,7 @@
             }
         }
 
-        /* Kartın döndürülebilir olduğunu anlatan hafif sallanma efekti */
+        /* Kartın döndürülebilir olduğunu anlatan sallanma (Giriş bitince başlar) */
         @keyframes initialSwing {
             0% { transform: rotateY(0deg); }
             20% { transform: rotateY(15deg); }
@@ -46,9 +46,9 @@
             min-height: 100vh;
             margin: 0;
             perspective: 1500px;
+            overflow: hidden; /* Giriş sırasında kaydırma çubuğu çıkmasın */
         }
 
-        /* Kart Konteynırı ve Güncellenmiş Yavaş Giriş Animasyonu */
         .card-container {
             width: 90%;
             max-width: 380px;
@@ -58,12 +58,11 @@
             transform-style: preserve-3d;
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             
-            /* 2.0s saniyeye çıkarıldı, daha yumuşak bir geçiş eklendi */
-            animation: fadeInUp 2.0s cubic-bezier(0.22, 1, 0.36, 1) forwards, 
-                       initialSwing 2s ease-in-out 2.2s; /* Giriş bittikten hemen sonra sallanır */
+            /* 3.5 saniye giriş süresi + 3.7 saniye sonra sallanma ipucu */
+            animation: fadeInUp 3.5s cubic-bezier(0.1, 0, 0, 1) forwards, 
+                       initialSwing 2s ease-in-out 3.7s;
         }
 
-        /* Masaüstü için hafif hover derinliği */
         .card-container:hover:not(.is-flipped) {
             transform: rotateY(10deg);
         }
@@ -78,7 +77,7 @@
             height: 100%;
             backface-visibility: hidden;
             border-radius: 30px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
             overflow: hidden;
             background: white;
             display: flex;
@@ -89,7 +88,6 @@
             transform: rotateY(180deg);
         }
 
-        /* Sağ üstteki döndürme ikonu */
         .flip-icon {
             position: absolute;
             top: 20px;
@@ -105,7 +103,6 @@
         }
         .flip-icon svg { fill: white; width: 20px; height: 20px; }
 
-        /* --- Ön Yüz --- */
         .header {
             background-color: var(--primary-blue);
             padding: 50px 20px 40px;
@@ -144,7 +141,6 @@
         .btn-mail { background-color: var(--email-orange); }
         .btn-linkedin { background-color: var(--linkedin-blue); }
 
-        /* --- Arka Yüz --- */
         .back-content {
             padding: 40px 30px;
             text-align: center;
@@ -266,9 +262,7 @@
 
 <script>
     function flipCard(event) {
-        // Butona tıklandığında dönmeyi engelle
         if (event.target.closest('.btn')) return;
-        
         const card = document.getElementById('card');
         card.classList.toggle('is-flipped');
     }
