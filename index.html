@@ -120,19 +120,19 @@
             background: linear-gradient(180deg, #ffffff 0%, #f1f4f8 100%);
         }
         .back-content {
-            padding: 40px 20px;
+            padding: 20px;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center; /* Dikeyde tam ortalama sağlar */
             flex-grow: 1;
-            justify-content: center;
         }
 
         .company-logo {
             width: 180px;
             height: auto;
-            margin-bottom: 30px;
+            margin-bottom: 30px; /* Logo ile liste arası mesafe */
             object-fit: contain;
         }
 
@@ -163,7 +163,6 @@
             color: #777;
             text-align: center;
             font-weight: 600;
-            margin-top: auto;
         }
     </style>
 </head>
@@ -185,7 +184,7 @@
             <div class="content">
                 <div class="actions">
                     <button class="btn btn-save" onclick="downloadVCard(event)">
-                        <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
                         REHBERE KAYDET
                     </button>
                     <a href="tel:+905059813325" class="btn btn-call" onclick="event.stopPropagation()">
