@@ -15,11 +15,11 @@
             --bg-light: #f4f7f9;
         }
 
-        /* Giriş Efekti (fadeInUp) */
+        /* Giriş Efekti (Daha yavaş ve süzülerek) */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(40px);
+                transform: translateY(60px);
             }
             to {
                 opacity: 1;
@@ -48,7 +48,7 @@
             perspective: 1500px;
         }
 
-        /* Kart Konteynırı ve Giriş Animasyonu */
+        /* Kart Konteynırı ve Güncellenmiş Yavaş Giriş Animasyonu */
         .card-container {
             width: 90%;
             max-width: 380px;
@@ -58,8 +58,9 @@
             transform-style: preserve-3d;
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             
-            /* FadeIn ve Swing efektlerini birleştirdik */
-            animation: fadeInUp 0.8s ease-out forwards, initialSwing 2s ease-in-out 1s;
+            /* 2.0s saniyeye çıkarıldı, daha yumuşak bir geçiş eklendi */
+            animation: fadeInUp 2.0s cubic-bezier(0.22, 1, 0.36, 1) forwards, 
+                       initialSwing 2s ease-in-out 2.2s; /* Giriş bittikten hemen sonra sallanır */
         }
 
         /* Masaüstü için hafif hover derinliği */
