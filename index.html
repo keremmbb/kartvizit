@@ -6,7 +6,7 @@
     <title>Görkem Yağız YAŞIK - Dijital Kartvizit</title>
     <style>
         :root {
-            --primary-blue: #2E3192; /* Karttaki lacivert tonu */
+            --primary-blue: #2E3192; 
             --text-dark: #333;
             --bg-light: #f4f7f9;
         }
@@ -38,10 +38,31 @@
         .title { font-style: italic; opacity: 0.9; font-size: 16px; }
         
         .content { padding: 30px 20px; }
-        .info-row { margin-bottom: 15px; color: var(--text-dark); font-size: 15px; line-height: 1.4; }
+        
+        /* SVG İkon Stilini Düzenleme */
+        .info-row { 
+            display: flex;
+            align-items: flex-start;
+            text-align: left;
+            margin-bottom: 20px; 
+            color: var(--text-dark); 
+            font-size: 14px; 
+            line-height: 1.4;
+            gap: 12px;
+        }
+        .svg-icon {
+            width: 20px;
+            height: 20px;
+            fill: var(--primary-blue);
+            flex-shrink: 0;
+        }
         
         .actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
         .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             padding: 15px;
             border-radius: 12px;
             text-decoration: none;
@@ -51,11 +72,12 @@
             cursor: pointer;
             font-size: 16px;
         }
+        .btn svg { fill: currentColor; width: 18px; height: 18px; }
         .btn-save { background-color: var(--primary-blue); color: white; }
         .btn-call { background-color: #28a745; color: white; }
         .btn-mail { background-color: #e7e7e7; color: var(--text-dark); }
         
-        .footer-logo { margin-top: 20px; font-size: 12px; color: #999; }
+        .footer-logo { margin-top: 20px; font-size: 11px; color: #999; }
     </style>
 </head>
 <body>
@@ -69,14 +91,25 @@
 
     <div class="content">
         <div class="info-row">
-            <strong>📍 Adres:</strong><br>
-            Rasimpaşa Mah. Nemlizade Sk. No:2 K:1 D:2 Kadıköy - İSTANBUL
+            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <div>Rasimpaşa Mah. Nemlizade Sk. No:2 K:1 D:2 Kadıköy - İSTANBUL</div>
         </div>
         
         <div class="actions">
-            <button class="btn btn-save" onclick="downloadVCard()">👤 REHBERE KAYDET</button>
-            <a href="tel:+905059813325" class="btn btn-call">📞 GSM: 0505 981 33 25</a>
-            <a href="mailto:gorkem.yagiz@hedefltd.com" class="btn btn-mail">📧 E-Posta Gönder</a>
+            <button class="btn btn-save" onclick="downloadVCard()">
+                <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                REHBERE KAYDET
+            </button>
+            
+            <a href="tel:+905059813325" class="btn btn-call">
+                <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                GSM: 0505 981 33 25
+            </a>
+            
+            <a href="mailto:gorkem.yagiz@hedefltd.com" class="btn btn-mail">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                E-Posta Gönder
+            </a>
         </div>
 
         <div class="footer-logo">
