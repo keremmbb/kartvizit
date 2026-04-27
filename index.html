@@ -86,7 +86,6 @@
         }
         .flip-icon-top svg { fill: white; width: 18px; height: 18px; }
 
-        /* --- ÖN YÜZ --- */
         .header {
             background-color: var(--primary-blue);
             padding: 45px 20px;
@@ -98,12 +97,11 @@
         .content { padding: 20px 25px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
         .actions { display: flex; flex-direction: column; gap: 12px; }
         
-        /* Butonlar için sıralı yüklenme */
         .btn {
             display: flex; align-items: center; justify-content: center; gap: 12px;
             padding: 14px; border-radius: 16px; text-decoration: none; font-weight: 600;
             color: white; border: none; font-size: 14px; transition: 0.3s;
-            opacity: 0; /* JS ile veya direkt animasyonla açılacak */
+            opacity: 0;
             animation: itemFadeIn 0.5s ease forwards;
         }
         
@@ -122,7 +120,6 @@
         .btn-mail { background-color: var(--email-orange); }
         .btn-linkedin { background-color: var(--linkedin-blue); }
 
-        /* --- ARKA YÜZ --- */
         .card-back {
             transform: rotateY(180deg);
             background: linear-gradient(180deg, #ffffff 0%, #f1f4f8 100%);
@@ -241,7 +238,7 @@
                 <img src="indir.jpg" alt="Hedef Bilgisayar Logo" class="company-logo">
                 
                 <div class="info-list">
-                    <a href="https://www.google.com/maps?q=Rasimpaşa+Mah.+Nemlizade+Sk.+No:2+Kadıköy+İstanbul" 
+                    <a href="https://www.google.com/maps/search/?api=1&query=Rasimpaşa+Mah.+Nemlizade+Sk.+No:2+K:1+D:2+Kadıköy+İstanbul" 
                        target="_blank" 
                        class="info-card" 
                        onclick="event.stopPropagation()">
@@ -252,37 +249,35 @@
                         </div>
                     </a>
 
-                    <div class="info-card">
+                    <a href="mailto:gorkem.yagiz@hedefltd.com" class="info-card" onclick="event.stopPropagation()">
                         <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
                         <div class="info-text">
-                            <span class="info-label">E-POSTA</span>
+                            <span class="info-label">E-POSTA (MAİL GÖNDER)</span>
                             gorkem.yagiz@hedefltd.com
                         </div>
-                    </div>
+                    </a>
 
-                    <div class="info-card">
+                    <a href="http://www.hedefotomasyon.net" target="_blank" class="info-card" onclick="event.stopPropagation()">
                         <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm10 12h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"/></svg></div>
                         <div class="info-text">
-                            <span class="info-label">FİRMA</span>
-                            Hedef Bilgisayar Sis. Kablolama San. ve Tic. Ltd. Şti.
+                            <span class="info-label">FİRMA (WEB SİTESİ)</span>
+                            Hedef Otomasyon & Robotics
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
-            <div class="flip-hint-bar" style="background: var(--primary-blue); color: white;">GERİ DÖNMEK İÇİN TIKLA ↻</div>
+            <div class="flip-hint-bar" style="background: var(--primary-blue); color: white;">GERİ DÖNMEK İÇİR TIKLA ↻</div>
         </div>
 
     </div>
 </div>
 
 <script>
-    // Kartı çevirme fonksiyonu
     function toggleFlip() {
         const card = document.getElementById('card');
         card.classList.toggle('is-flipped');
     }
 
-    // Rehbere kaydetme (vCard) fonksiyonu
     function downloadVCard(event) {
         event.stopPropagation();
         const vcard = "BEGIN:VCARD\n" +
