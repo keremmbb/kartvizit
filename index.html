@@ -14,18 +14,6 @@
             --bg-light: #f4f7f9;
         }
 
-        /* Giriş Efekti */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             background: linear-gradient(135deg, #f4f7f9 0%, #e1e5ea 100%);
@@ -34,183 +22,216 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
+            perspective: 1000px; /* 3D derinlik için şart */
         }
 
-        .card {
-            background: white;
+        /* Kart Konteynırı */
+        .card-container {
             width: 90%;
             max-width: 380px;
+            height: 550px; /* Sabit yükseklik dönüş için önemli */
+            cursor: pointer;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Kart döndüğünde tetiklenecek class */
+        .card-container.is-flipped {
+            transform: rotateY(180deg);
+        }
+
+        /* Ön ve Arka Yüzün Ortak Özellikleri */
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden; /* Arkası görünmesin */
             border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
             overflow: hidden;
-            text-align: center;
-            margin: 20px 0;
-            animation: fadeInUp 0.8s ease-out forwards;
-            /* Kartın genel geçiş efekti */
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            background: white;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Kartın üzerine gelince hafifçe yükselmesi */
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        /* Arka Yüzün Başlangıç Pozisyonu */
+        .card-back {
+            transform: rotateY(180deg);
+            background-color: #fff;
         }
 
+        /* --- Ön Yüz Tasarımı --- */
         .header {
             background-color: var(--primary-blue);
             padding: 40px 20px;
             color: white;
-            position: relative;
+            text-align: center;
         }
-        
         .company-name { font-weight: bold; letter-spacing: 2px; margin-bottom: 10px; font-size: 20px; }
         .user-name { font-size: 26px; margin: 15px 0 5px 0; }
         .title { font-style: italic; opacity: 0.9; font-size: 16px; }
         
-        .content { padding: 30px 20px; }
+        .content { padding: 25px 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
         
-        .info-row { 
-            display: flex;
-            align-items: flex-start;
-            text-align: left;
-            margin-bottom: 20px; 
-            color: var(--text-dark); 
-            font-size: 14px; 
-            line-height: 1.4;
-            gap: 12px;
-            padding: 8px;
-            border-radius: 10px;
-            transition: background 0.3s ease;
-        }
-
-        /* Adres satırına hover efekti */
-        .info-row:hover {
-            background-color: #f8f9fa;
-        }
-
-        .svg-icon {
-            width: 20px;
-            height: 20px;
-            fill: var(--primary-blue);
-            flex-shrink: 0;
-        }
-        
-        .actions { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+        .actions { display: flex; flex-direction: column; gap: 10px; }
         
         .btn {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
-            padding: 16px;
-            border-radius: 14px;
+            padding: 14px;
+            border-radius: 12px;
             text-decoration: none;
             font-weight: bold;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
             color: white;
-            /* Akıcı animasyon için transition */
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
+            font-size: 15px;
+            transition: all 0.3s ease;
         }
-
-        .btn svg { 
-            fill: white; 
-            width: 22px; 
-            height: 22px; 
-            transition: transform 0.3s ease;
-        }
+        .btn:hover { transform: scale(1.03); filter: brightness(1.1); }
+        .btn svg { fill: white; width: 20px; height: 20px; }
         
-        /* HOVER (Üstüne gelme) EFEKTLERİ */
-        .btn:hover {
-            transform: scale(1.05); /* %5 büyüme */
-            filter: brightness(1.1); /* Rengi hafif açar */
-            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
-        }
-
-        /* Hover durumunda ikonu hareketlendir */
-        .btn:hover svg {
-            transform: rotate(-10deg) scale(1.1);
-        }
-
-        /* Tıklama anı (Active) efekti */
-        .btn:active {
-            transform: scale(0.96);
-        }
-
         .btn-save { background-color: var(--primary-blue); }
         .btn-whatsapp { background-color: var(--whatsapp-green); }
         .btn-call { background-color: var(--phone-blue); }
         .btn-mail { background-color: var(--email-orange); }
-        
-        .footer-logo { margin-top: 20px; font-size: 11px; color: #999; }
+
+        /* --- Arka Yüz Tasarımı --- */
+        .back-content {
+            padding: 40px 30px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            box-sizing: border-box;
+        }
+        .qr-placeholder {
+            width: 150px;
+            height: 150px;
+            background: #eee;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            border: 2px dashed #ccc;
+        }
+        .info-block {
+            text-align: left;
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+        .info-item svg { fill: var(--primary-blue); width: 18px; }
+
+        .flip-hint {
+            font-size: 11px;
+            color: #999;
+            margin-top: auto;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
     </style>
 </head>
 <body>
 
-<div class="card">
-    <div class="header">
-        <div class="company-name">HEDEF BİLGİSAYAR</div>
-        <h1 class="user-name">Görkem Yağız YAŞIK</h1>
-        <div class="title">Proje Yetkilisi</div>
+<div class="card-container" id="card" onclick="flipCard(event)">
+    <div class="card-face card-front">
+        <div class="header">
+            <div class="company-name">HEDEF BİLGİSAYAR</div>
+            <h1 class="user-name">Görkem Yağız YAŞIK</h1>
+            <div class="title">Proje Yetkilisi</div>
+        </div>
+
+        <div class="content">
+            <div class="actions">
+                <button class="btn btn-save" onclick="downloadVCard(event)">
+                    <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                    REHBERE KAYDET
+                </button>
+                <a href="https://wa.me/905059813325" class="btn btn-whatsapp" onclick="event.stopPropagation()">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                    WHATSAPP'TAN YAZ
+                </a>
+                <a href="tel:+905059813325" class="btn btn-call" onclick="event.stopPropagation()">
+                    <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    0505 981 33 25
+                </a>
+            </div>
+            <div class="flip-hint">Karta dokunarak detayları gör ↻</div>
+        </div>
     </div>
 
-    <div class="content">
-        <div class="info-row">
-            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            <div>Rasimpaşa Mah. Nemlizade Sk. No:2 K:1 D:2 Kadıköy - İSTANBUL</div>
-        </div>
-        
-        <div class="actions">
-            <button class="btn btn-save" onclick="downloadVCard()">
-                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                REHBERE KAYDET
-            </button>
-
-            <a href="https://wa.me/905059813325" class="btn btn-whatsapp">
-                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-                WHATSAPP'TAN YAZ
-            </a>
+    <div class="card-face card-back">
+        <div class="back-content">
+            <h3 style="color: var(--primary-blue); margin-top: 0;">İletişim Bilgileri</h3>
             
-            <a href="tel:+905059813325" class="btn btn-call">
-                <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                0505 981 33 25
-            </a>
-            
-            <a href="mailto:gorkem.yagiz@hedefltd.com" class="btn btn-mail">
-                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                E-POSTA GÖNDER
-            </a>
-        </div>
+            <div class="qr-placeholder">
+                <span style="color: #999; font-size: 12px;">HEDEF LOGO</span>
+            </div>
 
-        <div class="footer-logo">
-            Hedef Bilgisayar Sistemleri Kablolama San. ve Tic. Ltd. Şti.
+            <div class="info-block">
+                <div class="info-item">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    <span>Rasimpaşa Mah. Nemlizade Sk. No:2 K:1 D:2 Kadıköy / İSTANBUL</span>
+                </div>
+                <div class="info-item">
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <span>gorkem.yagiz@hedefltd.com</span>
+                </div>
+                <div class="info-item">
+                    <svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm10 12h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"/></svg>
+                    <span>Hedef Bilgisayar Sis. Kablolama Ltd. Şti.</span>
+                </div>
+            </div>
+
+            <div class="flip-hint">Geri dönmek için dokun ↻</div>
         </div>
     </div>
 </div>
 
 <script>
-function downloadVCard() {
-    const vcard = "BEGIN:VCARD\n" +
-                  "VERSION:3.0\n" +
-                  "FN:Görkem Yağız YAŞIK\n" +
-                  "ORG:Hedef Bilgisayar Sistemleri\n" +
-                  "TITLE:Proje Yetkilisi\n" +
-                  "TEL;TYPE=CELL:+905059813325\n" +
-                  "TEL;TYPE=WORK:02165451498\n" +
-                  "EMAIL:gorkem.yagiz@hedefltd.com\n" +
-                  "ADR;TYPE=WORK:;;Rasimpaşa Mah. Nemlizade Sk. No:2 K:1 D:2;Kadıköy;İSTANBUL;;\n" +
-                  "END:VCARD";
+    // Kartı döndürme fonksiyonu
+    function flipCard(event) {
+        const card = document.getElementById('card');
+        card.classList.toggle('is-flipped');
+    }
 
-    const blob = new Blob([vcard], { type: "text/vcard" });
-    const url = window.URL.createObjectURL(blob);
-    const newLink = document.createElement("a");
-    newLink.href = url;
-    newLink.setAttribute("download", "GorkemYagizYASIK.vcf");
-    document.body.appendChild(newLink);
-    newLink.click();
-    document.body.removeChild(newLink);
-}
+    // Rehbere kaydet butonu tıklandığında kartın dönmesini engellemek için stopPropagation kullandık
+    function downloadVCard(event) {
+        event.stopPropagation(); // Kartın dönmesini engelle
+        
+        const vcard = "BEGIN:VCARD\n" +
+                      "VERSION:3.0\n" +
+                      "FN:Görkem Yağız YAŞIK\n" +
+                      "ORG:Hedef Bilgisayar Sistemleri\n" +
+                      "TITLE:Proje Yetkilisi\n" +
+                      "TEL;TYPE=CELL:+905059813325\n" +
+                      "TEL;TYPE=WORK:02165451498\n" +
+                      "EMAIL:gorkem.yagiz@hedefltd.com\n" +
+                      "ADR;TYPE=WORK:;;Rasimpaşa Mah. Nemlizade Sk. No:2 K:1 D:2;Kadıköy;İSTANBUL;;\n" +
+                      "END:VCARD";
+
+        const blob = new Blob([vcard], { type: "text/vcard" });
+        const url = window.URL.createObjectURL(blob);
+        const newLink = document.createElement("a");
+        newLink.href = url;
+        newLink.setAttribute("download", "GorkemYagizYASIK.vcf");
+        document.body.appendChild(newLink);
+        newLink.click();
+        document.body.removeChild(newLink);
+    }
 </script>
 
 </body>
