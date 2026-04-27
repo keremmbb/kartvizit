@@ -15,13 +15,11 @@
             --bg-light: #f8f9fa;
         }
 
-        /* 2 Saniyelik Giriş Animasyonu */
         @keyframes fadeInUp {
             0% { opacity: 0; transform: translateY(80px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* Sallanma ipucu */
         @keyframes initialSwing {
             0% { transform: rotateY(0deg); }
             20% { transform: rotateY(15deg); }
@@ -39,7 +37,6 @@
             min-height: 100vh;
             margin: 0;
             perspective: 2000px;
-            overflow: hidden;
         }
 
         .wrapper {
@@ -75,111 +72,106 @@
             overflow: hidden;
         }
 
+        /* --- Üst Köşe Flip İkonu --- */
+        .flip-icon-top {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            z-index: 10;
+        }
+        .flip-icon-top svg { fill: white; width: 18px; height: 18px; }
+
         /* --- ÖN YÜZ STİLLERİ --- */
         .header {
             background-color: var(--primary-blue);
             padding: 50px 20px;
             color: white;
             text-align: center;
+            position: relative;
         }
         .user-name { font-size: 26px; margin: 10px 0; font-weight: 700; }
-        .content { padding: 30px 25px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
-        .actions { display: flex; flex-direction: column; gap: 12px; }
+        .content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+        .actions { display: flex; flex-direction: column; gap: 10px; }
+        
         .btn {
             display: flex; align-items: center; justify-content: center; gap: 12px;
-            padding: 16px; border-radius: 16px; text-decoration: none; font-weight: 600;
-            color: white; border: none; font-size: 15px; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 15px; border-radius: 16px; text-decoration: none; font-weight: 600;
+            color: white; border: none; font-size: 15px; transition: 0.3s;
         }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); filter: brightness(1.1); }
+        .btn:hover { transform: translateY(-3px); filter: brightness(1.1); }
         .btn svg { fill: white; width: 20px; height: 20px; }
         .btn-save { background-color: var(--primary-blue); }
         .btn-whatsapp { background-color: var(--whatsapp-green); }
         .btn-call { background-color: var(--phone-blue); }
         .btn-mail { background-color: var(--email-orange); }
 
-        /* --- ARKA YÜZ PREMIUM STİLLER --- */
+        /* --- ARKA YÜZ (Düzeltildi) --- */
         .card-back {
             transform: rotateY(180deg);
             background: linear-gradient(180deg, #ffffff 0%, #f1f4f8 100%);
         }
         .back-content {
-            padding: 40px 25px;
+            padding: 30px 20px;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             flex-grow: 1;
+            overflow-y: auto; /* İçerik çok uzun olursa kart içinde kaydırılabilir */
         }
         .qr-section {
             background: white;
-            padding: 20px;
-            border-radius: 24px;
+            padding: 15px;
+            border-radius: 20px;
             box-shadow: 0 10px 30px rgba(46, 49, 146, 0.1);
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             border: 1px solid rgba(46, 49, 146, 0.05);
         }
         .qr-placeholder {
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             border: 2px dashed #cbd5e0;
-            border-radius: 15px;
-        }
-        .back-title {
-            color: var(--primary-blue);
-            font-size: 20px;
-            font-weight: 800;
-            margin-bottom: 5px;
-            letter-spacing: 1px;
-        }
-        .back-subtitle {
-            font-size: 13px;
-            color: #7f8c8d;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            border-radius: 12px;
         }
         .info-list {
             width: 100%;
-            text-align: left;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 12px; /* Boşluk azaltıldı */
         }
         .info-card {
             display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            padding: 15px;
-            background: rgba(255,255,255,0.6);
-            border-radius: 18px;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 15px;
             border: 1px solid white;
             transition: 0.3s;
         }
-        .info-card:hover { background: white; transform: translateX(5px); }
-        .info-icon {
-            background: rgba(46, 49, 146, 0.1);
-            padding: 10px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .info-icon svg { fill: var(--primary-blue); width: 20px; height: 20px; }
-        .info-text { font-size: 14px; color: var(--text-dark); line-height: 1.5; font-weight: 500; }
-        .info-label { font-size: 11px; color: #95a5a6; display: block; margin-bottom: 2px; font-weight: 700; }
+        .info-icon svg { fill: var(--primary-blue); width: 18px; height: 18px; }
+        .info-text { font-size: 13px; color: var(--text-dark); text-align: left; font-weight: 500; }
+        .info-label { font-size: 10px; color: #95a5a6; font-weight: 700; text-transform: uppercase; }
 
         .flip-hint-bar {
-            background: var(--primary-blue);
-            padding: 15px;
-            font-size: 12px;
-            color: white;
+            background: #f1f4f8;
+            padding: 12px;
+            font-size: 11px;
+            color: #777;
             text-align: center;
             font-weight: 600;
-            letter-spacing: 1px;
             margin-top: auto;
         }
     </style>
@@ -191,15 +183,18 @@
         
         <div class="card-face card-front">
             <div class="header">
-                <div style="font-size: 13px; letter-spacing: 3px; opacity: 0.8; font-weight: 600;">HEDEF BİLGİSAYAR</div>
+                <div class="flip-icon-top">
+                    <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
+                </div>
+                <div style="font-size: 12px; letter-spacing: 3px; opacity: 0.8; font-weight: 600;">HEDEF BİLGİSAYAR</div>
                 <h1 class="user-name">Görkem Yağız YAŞIK</h1>
-                <div style="font-style: italic; font-size: 15px; opacity: 0.9;">Proje Yetkilisi</div>
+                <div style="font-style: italic; font-size: 14px; opacity: 0.9;">Proje Yetkilisi</div>
             </div>
 
             <div class="content">
                 <div class="actions">
                     <button class="btn btn-save" onclick="downloadVCard(event)">
-                        <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
                         REHBERE KAYDET
                     </button>
                     <a href="tel:+905059813325" class="btn btn-call" onclick="event.stopPropagation()">
@@ -216,54 +211,48 @@
                     </a>
                 </div>
             </div>
-            <div class="flip-hint-bar" style="background: #f1f4f8; color: #777;">BİLGİ İÇİN TIKLA ↻</div>
+            <div class="flip-hint-bar">BİLGİ İÇİN TIKLA ↻</div>
         </div>
 
         <div class="card-face card-back">
             <div class="back-content">
-                <h3 class="back-title">HEDEF BİLGİSAYAR</h3>
-                <p class="back-subtitle">Dijital Kartvizit</p>
+                <h3 style="color: var(--primary-blue); margin: 0; font-size: 18px;">HEDEF BİLGİSAYAR</h3>
+                <p style="font-size: 11px; color: #7f8c8d; letter-spacing: 2px; margin: 5px 0 20px 0;">DİJİTAL KARTVİZİT</p>
                 
                 <div class="qr-section">
                     <div class="qr-placeholder">
-                        <span style="color: var(--primary-blue); font-size: 11px; font-weight: bold;">QR KOD</span>
-                        <div style="font-size: 9px; color: #95a5a6; margin-top: 5px;">Yakında...</div>
+                        <svg width="40" height="40" viewBox="0 0 24 24" style="fill: #cbd5e0; margin-bottom: 5px;"><path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm13-2h3v2h-3v-2zm-3 0h2v2h-2v-2zm3 3h3v2h-3v-2zm-3 3h2v2h-2v-2zm3 0h3v2h-3v-2z"/></svg>
+                        <span style="color: #95a5a6; font-size: 9px; font-weight: bold;">YAKINDA</span>
                     </div>
                 </div>
 
                 <div class="info-list">
                     <div class="info-card">
-                        <div class="info-icon">
-                            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                        </div>
+                        <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
                         <div class="info-text">
-                            <span class="info-label">ADRES</span>
+                            <span class="info-label">ADRES</span><br>
                             Rasimpaşa Mah. Nemlizade Sk. No:2 K:1 D:2 Kadıköy / İSTANBUL
                         </div>
                     </div>
 
                     <div class="info-card">
-                        <div class="info-icon">
-                            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                        </div>
+                        <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
                         <div class="info-text">
-                            <span class="info-label">E-POSTA</span>
+                            <span class="info-label">E-POSTA</span><br>
                             gorkem.yagiz@hedefltd.com
                         </div>
                     </div>
 
                     <div class="info-card">
-                        <div class="info-icon">
-                            <svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm10 12h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"/></svg>
-                        </div>
+                        <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm10 12h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"/></svg></div>
                         <div class="info-text">
-                            <span class="info-label">FİRMA</span>
+                            <span class="info-label">FİRMA</span><br>
                             Hedef Bilgisayar Sis. Kablolama San. ve Tic. Ltd. Şti.
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="flip-hint-bar">GERİ DÖNMEK İÇİN TIKLA ↻</div>
+            <div class="flip-hint-bar" style="background: var(--primary-blue); color: white;">GERİ DÖNMEK İÇİN TIKLA ↻</div>
         </div>
 
     </div>
