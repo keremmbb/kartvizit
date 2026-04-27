@@ -15,9 +15,15 @@
             --bg-light: #f8f9fa;
         }
 
-        @keyframes fadeInUp {
-            0% { opacity: 0; transform: translateY(50px); }
-            100% { opacity: 1; transform: translateY(0); }
+        /* --- YÜKLENME EFEKTLERİ --- */
+        @keyframes cardEntry {
+            0% { opacity: 0; transform: translateY(60px) scale(0.9); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes itemFadeIn {
+            0% { opacity: 0; transform: translateX(-20px); }
+            100% { opacity: 1; transform: translateX(0); }
         }
 
         body {
@@ -29,13 +35,14 @@
             min-height: 100vh;
             margin: 0;
             perspective: 2000px;
+            overflow-x: hidden;
         }
 
         .wrapper {
             width: 90%;
             max-width: 380px;
-            animation: fadeInUp 1.2s cubic-bezier(0.2, 1, 0.3, 1) forwards;
             position: relative;
+            animation: cardEntry 1s cubic-bezier(0.2, 1, 0.3, 1) forwards;
         }
 
         .card-container {
@@ -56,7 +63,7 @@
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
             border-radius: 32px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.12);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
             background: white;
             display: flex;
             flex-direction: column;
@@ -89,14 +96,24 @@
         }
         .user-name { font-size: 26px; margin: 10px 0; font-weight: 700; }
         .content { padding: 20px 25px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
-        .actions { display: flex; flex-direction: column; gap: 10px; }
+        .actions { display: flex; flex-direction: column; gap: 12px; }
         
+        /* Butonlar için sıralı yüklenme */
         .btn {
             display: flex; align-items: center; justify-content: center; gap: 12px;
             padding: 14px; border-radius: 16px; text-decoration: none; font-weight: 600;
             color: white; border: none; font-size: 14px; transition: 0.3s;
+            opacity: 0; /* JS ile veya direkt animasyonla açılacak */
+            animation: itemFadeIn 0.5s ease forwards;
         }
-        .btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        
+        .btn:nth-child(1) { animation-delay: 0.4s; }
+        .btn:nth-child(2) { animation-delay: 0.5s; }
+        .btn:nth-child(3) { animation-delay: 0.6s; }
+        .btn:nth-child(4) { animation-delay: 0.7s; }
+        .btn:nth-child(5) { animation-delay: 0.8s; }
+
+        .btn:hover { transform: translateY(-3px) scale(1.02); filter: brightness(1.1); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .btn svg { fill: white; width: 18px; height: 18px; }
         
         .btn-save { background-color: var(--primary-blue); }
@@ -125,6 +142,9 @@
             height: auto;
             margin-bottom: 30px; 
             object-fit: contain;
+            animation: itemFadeIn 0.8s ease forwards;
+            animation-delay: 0.3s;
+            opacity: 0;
         }
 
         .info-list {
@@ -142,15 +162,21 @@
             background: #f0f3f7;
             border-radius: 18px;
             border: 1.5px solid #d1d9e6;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.04);
             transition: 0.3s;
-            text-decoration: none; /* Link alt çizgisini kaldırır */
+            text-decoration: none;
             cursor: pointer;
+            opacity: 0;
+            animation: itemFadeIn 0.5s ease forwards;
         }
+
+        .info-list .info-card:nth-child(1) { animation-delay: 0.5s; }
+        .info-list .info-card:nth-child(2) { animation-delay: 0.6s; }
+        .info-list .info-card:nth-child(3) { animation-delay: 0.7s; }
 
         .info-card:hover {
             background: #e6e9ef;
-            transform: translateY(-2px);
+            transform: translateX(5px);
             border-color: var(--primary-blue);
         }
 
@@ -215,7 +241,7 @@
                 <img src="indir.jpg" alt="Hedef Bilgisayar Logo" class="company-logo">
                 
                 <div class="info-list">
-                    <a href="https://www.google.com/maps/search/?api=1&query=Rasimpaşa+Mah.+Nemlizade+Sk.+No:2+Kadıköy+İstanbul" 
+                    <a href="https://www.google.com/maps?q=Rasimpaşa+Mah.+Nemlizade+Sk.+No:2+Kadıköy+İstanbul" 
                        target="_blank" 
                        class="info-card" 
                        onclick="event.stopPropagation()">
@@ -250,11 +276,13 @@
 </div>
 
 <script>
+    // Kartı çevirme fonksiyonu
     function toggleFlip() {
         const card = document.getElementById('card');
         card.classList.toggle('is-flipped');
     }
 
+    // Rehbere kaydetme (vCard) fonksiyonu
     function downloadVCard(event) {
         event.stopPropagation();
         const vcard = "BEGIN:VCARD\n" +
@@ -264,6 +292,7 @@
                       "TITLE:Proje Yetkilisi\n" +
                       "TEL;TYPE=CELL:+905059813325\n" +
                       "EMAIL:gorkem.yagiz@hedefltd.com\n" +
+                      "ADR;TYPE=WORK:;;Rasimpaşa Mah. Nemlizade Sk. No:2 K:1 D:2;Kadıköy;İstanbul;;Turkey\n" +
                       "END:VCARD";
 
         const blob = new Blob([vcard], { type: "text/vcard" });
