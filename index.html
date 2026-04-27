@@ -15,7 +15,6 @@
             --bg-light: #f8f9fa;
         }
 
-        /* Kartın aşağıdan yukarı süzülme efekti */
         @keyframes fadeInUp {
             0% { opacity: 0; transform: translateY(50px); }
             100% { opacity: 1; transform: translateY(0); }
@@ -45,7 +44,6 @@
             position: relative;
             transform-style: preserve-3d;
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            /* Sallanma animasyonu buradan kaldırıldı */
             cursor: pointer;
         }
 
@@ -135,24 +133,29 @@
             flex-direction: column;
             gap: 15px;
         }
+
+        /* Bilgi kartlarının arka planı ve çerçevesi belirginleştirildi */
         .info-card {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 12px 15px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            border: 1px solid #edf2f7;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            padding: 15px;
+            background: #f0f3f7; /* Daha belirgin gri tonu */
+            border-radius: 18px;
+            border: 1.5px solid #d1d9e6; /* Belirgin çerçeve */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.06); /* Daha derin gölge */
             transition: 0.3s;
         }
+
         .info-card:hover {
-            background: #f1f4f8;
-            transform: scale(1.02);
+            background: #e6e9ef;
+            transform: translateY(-2px);
+            border-color: var(--primary-blue);
         }
-        .info-icon svg { fill: var(--primary-blue); width: 20px; height: 20px; }
+
+        .info-icon svg { fill: var(--primary-blue); width: 22px; height: 22px; }
         .info-text { font-size: 13px; color: var(--text-dark); text-align: left; font-weight: 500; line-height: 1.4; }
-        .info-label { font-size: 10px; color: #7f8c8d; font-weight: 800; text-transform: uppercase; margin-bottom: 2px; display: block; }
+        .info-label { font-size: 10px; color: #5a67d8; font-weight: 800; text-transform: uppercase; margin-bottom: 3px; display: block; }
 
         .flip-hint-bar {
             background: #f1f4f8;
