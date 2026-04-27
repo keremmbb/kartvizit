@@ -112,36 +112,38 @@
             z-index: 20; 
         }
         
-        /* --- BUTONLAR VE YUMUŞAK (SMOOTH) GEÇİŞ --- */
+        /* --- EKSTRA YUMUŞATILMIŞ BUTONLAR --- */
         .btn {
             display: flex; align-items: center; justify-content: center; gap: 12px;
             padding: 14px; border-radius: 16px; text-decoration: none; font-weight: 600;
             color: white; border: none; font-size: 14px; 
             
-            /* GEÇİŞ BURADA: 0.4 saniye sürer ve yumuşak bir eğri (cubic-bezier) kullanır */
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
-                        box-shadow 0.4s ease, 
-                        filter 0.4s ease; 
+            /* SÜRE UZATILDI (0.6s) VE EĞRİ DEĞİŞTİ */
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), 
+                        box-shadow 0.6s cubic-bezier(0.23, 1, 0.32, 1), 
+                        filter 0.6s ease; 
             
             opacity: 0;
             animation: itemFadeIn 0.5s ease forwards;
             cursor: pointer;
             position: relative;
             transform: scale(1);
-            will-change: transform; /* Tarayıcıya performans optimizasyonu sağlar */
+            transform-origin: center; /* Büyüme merkezden dışa doğru olur */
+            backface-visibility: hidden;
+            will-change: transform;
         }
 
-        /* YUMUŞAK BÜYÜME ETKİSİ */
+        /* YUMUŞAK VE ELASTİK BÜYÜME */
         .actions .btn:hover { 
-            transform: scale(1.08) translateY(-2px) !important; 
-            filter: brightness(1.05); 
-            box-shadow: 0 12px 24px rgba(0,0,0,0.18); 
+            transform: scale(1.10) !important; 
+            filter: brightness(1.1); 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2); 
             z-index: 50;
         }
 
         .btn:active {
-            transform: scale(0.96) !important;
-            transition: transform 0.1s ease; /* Tıklama tepkisi daha hızlı olsun */
+            transform: scale(0.94) !important;
+            transition: transform 0.2s ease;
         }
         
         .btn:nth-child(1) { animation-delay: 0.4s; }
@@ -197,13 +199,15 @@
             border-radius: 18px;
             border: 1.5px solid #d1d9e6;
             text-decoration: none;
-            /* Bilgi kartları için de yumuşak geçiş ekledim */
-            transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+            /* Bilgi kartları geçişi de yumuşatıldı */
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), 
+                        background 0.5s ease, 
+                        border-color 0.5s ease;
         }
 
         .info-card:hover {
             background: #ffffff;
-            transform: translateX(8px);
+            transform: translateX(10px);
             border-color: var(--primary-blue);
         }
 
@@ -270,7 +274,7 @@
                 <img src="indir.jpg" alt="Hedef Bilgisayar Logo" class="company-logo">
                 
                 <div class="info-list">
-                    <a href="https://maps.google.com/?q=Rasimpaşa+Mah.+Nemlizade+Sk.+No:2+K:1+D:2+Kadıköy" target="_blank" class="info-card" onclick="event.stopPropagation()">
+                    <a href="https://www.google.com/maps?q=Rasimpaşa+Mah.+Nemlizade+Sk.+No:2+Kadıköy+İstanbul" target="_blank" class="info-card" onclick="event.stopPropagation()">
                         <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
                         <div class="info-text">
                             <span class="info-label">ADRES (HARİTADA GÖR)</span>
