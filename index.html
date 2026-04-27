@@ -72,7 +72,6 @@
             overflow: hidden;
         }
 
-        /* --- Üst Köşe Flip İkonu --- */
         .flip-icon-top {
             position: absolute;
             top: 20px;
@@ -89,7 +88,7 @@
         }
         .flip-icon-top svg { fill: white; width: 18px; height: 18px; }
 
-        /* --- ÖN YÜZ STİLLERİ --- */
+        /* --- ÖN YÜZ --- */
         .header {
             background-color: var(--primary-blue);
             padding: 45px 20px;
@@ -121,7 +120,7 @@
             background: linear-gradient(180deg, #ffffff 0%, #f1f4f8 100%);
         }
         .back-content {
-            padding: 25px 20px;
+            padding: 35px 20px;
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -129,51 +128,33 @@
             flex-grow: 1;
         }
 
-        /* Logo Alanı Düzenlendi */
         .company-logo {
-            width: 120px;
+            width: 160px;
             height: auto;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             object-fit: contain;
         }
 
-        .qr-section {
-            background: white;
-            padding: 12px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(46, 49, 146, 0.1);
-            margin-bottom: 15px;
-            border: 1px solid rgba(46, 49, 146, 0.05);
-        }
-        .qr-placeholder {
-            width: 80px;
-            height: 80px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 2px dashed #cbd5e0;
-            border-radius: 12px;
-        }
         .info-list {
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 15px;
+            margin-top: 20px;
         }
         .info-card {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 10px 15px;
-            background: rgba(255,255,255,0.7);
+            padding: 12px 15px;
+            background: rgba(255,255,255,0.8);
             border-radius: 15px;
             border: 1px solid white;
-            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
         }
-        .info-icon svg { fill: var(--primary-blue); width: 18px; height: 18px; }
-        .info-text { font-size: 13px; color: var(--text-dark); text-align: left; font-weight: 500; line-height: 1.3; }
-        .info-label { font-size: 10px; color: #95a5a6; font-weight: 700; text-transform: uppercase; }
+        .info-icon svg { fill: var(--primary-blue); width: 20px; height: 20px; }
+        .info-text { font-size: 13px; color: var(--text-dark); text-align: left; font-weight: 500; line-height: 1.4; }
+        .info-label { font-size: 10px; color: #95a5a6; font-weight: 700; text-transform: uppercase; margin-bottom: 2px; display: block; }
 
         .flip-hint-bar {
             background: #f1f4f8;
@@ -232,20 +213,13 @@
             <div class="back-content">
                 <img src="indir.jpg" alt="Hedef Bilgisayar Logo" class="company-logo">
                 
-                <p style="font-size: 11px; color: #7f8c8d; letter-spacing: 2px; margin: 0 0 15px 0;">DİJİTAL KARTVİZİT</p>
+                <p style="font-size: 11px; color: #7f8c8d; letter-spacing: 2px; margin: 0 0 20px 0; font-weight: bold;">DİJİTAL KARTVİZİT</p>
                 
-                <div class="qr-section">
-                    <div class="qr-placeholder">
-                        <svg width="30" height="30" viewBox="0 0 24 24" style="fill: #cbd5e0; margin-bottom: 5px;"><path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm13-2h3v2h-3v-2zm-3 0h2v2h-2v-2zm3 3h3v2h-3v-2zm-3 3h2v2h-2v-2zm3 0h3v2h-3v-2z"/></svg>
-                        <span style="color: #95a5a6; font-size: 8px; font-weight: bold;">YAKINDA</span>
-                    </div>
-                </div>
-
                 <div class="info-list">
                     <div class="info-card">
                         <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
                         <div class="info-text">
-                            <span class="info-label">ADRES</span><br>
+                            <span class="info-label">ADRES</span>
                             Rasimpaşa Mah. Nemlizade Sk. No:2 K:1 D:2 Kadıköy / İSTANBUL
                         </div>
                     </div>
@@ -253,7 +227,7 @@
                     <div class="info-card">
                         <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
                         <div class="info-text">
-                            <span class="info-label">E-POSTA</span><br>
+                            <span class="info-label">E-POSTA</span>
                             gorkem.yagiz@hedefltd.com
                         </div>
                     </div>
@@ -261,7 +235,7 @@
                     <div class="info-card">
                         <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm10 12h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"/></svg></div>
                         <div class="info-text">
-                            <span class="info-label">FİRMA</span><br>
+                            <span class="info-label">FİRMA</span>
                             Hedef Bilgisayar Sis. Kablolama San. ve Tic. Ltd. Şti.
                         </div>
                     </div>
