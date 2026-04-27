@@ -36,7 +36,6 @@
             margin: 0;
             perspective: 2000px;
             overflow-x: hidden;
-            /* Seçimi engellemek daha premium hissettirir */
             -webkit-user-select: none;
             user-select: none;
         }
@@ -100,7 +99,6 @@
         .content { padding: 20px 25px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
         .actions { display: flex; flex-direction: column; gap: 12px; }
         
-        /* PREMIUM DOKUNMATİK TEPKİ (CSS) */
         .btn, .info-card {
             display: flex; align-items: center; justify-content: center; gap: 12px;
             padding: 14px; border-radius: 16px; text-decoration: none; font-weight: 600;
@@ -110,7 +108,6 @@
             cursor: pointer;
         }
 
-        /* Tıklama anında küçülme efekti */
         .btn:active, .info-card:active {
             transform: scale(0.96) !important;
             filter: brightness(0.9);
@@ -187,10 +184,8 @@
         .info-label { font-size: 10px; color: #5a67d8; font-weight: 800; text-transform: uppercase; margin-bottom: 3px; display: block; }
 
         .flip-hint-bar {
-            background: #f1f4f8;
             padding: 12px;
             font-size: 11px;
-            color: #777;
             text-align: center;
             font-weight: 600;
         }
@@ -235,7 +230,7 @@
                     </a>
                 </div>
             </div>
-            <div class="flip-hint-bar">BİLGİ İÇİN TIKLA ↻</div>
+            <div class="flip-hint-bar" style="background: var(--primary-blue); color: white;">BİLGİ İÇİN TIKLA ↻</div>
         </div>
 
         <div class="card-face card-back">
@@ -243,7 +238,7 @@
                 <img src="indir.jpg" alt="Hedef Bilgisayar Logo" class="company-logo">
                 
                 <div class="info-list">
-                    <a href="https://maps.google.com/?q=Rasimpaşa+Mah+Nemlizade+Sk+No2+Kadıköy" 
+                    <a href="https://www.google.com/maps/search/?api=1&query=Rasimpaşa+Mah.+Nemlizade+Sk.+No:2+K:1+D:2+Kadıköy+İstanbul" 
                        target="_blank" 
                        class="info-card" 
                        onclick="triggerHaptic(); event.stopPropagation()">
@@ -281,16 +276,17 @@
     // --- HAPTIC FEEDBACK FONKSİYONU ---
     function triggerHaptic() {
         if ("vibrate" in navigator) {
-            // Çok kısa bir titreşim (15 milisaniye) - "Tık" hissi verir
             navigator.vibrate(15);
         }
     }
 
+    // Kartı çevirme fonksiyonu
     function toggleFlip() {
         const card = document.getElementById('card');
         card.classList.toggle('is-flipped');
     }
 
+    // Rehbere kaydetme (vCard) fonksiyonu
     function downloadVCard(event) {
         event.stopPropagation();
         const vcard = "BEGIN:VCARD\n" +
