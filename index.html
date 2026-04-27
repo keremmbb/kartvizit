@@ -15,7 +15,19 @@
             --bg-light: #f4f7f9;
         }
 
-        /* İlk açılışta kartın sallanma animasyonu */
+        /* Giriş Efekti (fadeInUp) */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Kartın döndürülebilir olduğunu anlatan hafif sallanma efekti */
         @keyframes initialSwing {
             0% { transform: rotateY(0deg); }
             20% { transform: rotateY(15deg); }
@@ -36,6 +48,7 @@
             perspective: 1500px;
         }
 
+        /* Kart Konteynırı ve Giriş Animasyonu */
         .card-container {
             width: 90%;
             max-width: 380px;
@@ -44,10 +57,12 @@
             position: relative;
             transform-style: preserve-3d;
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            animation: initialSwing 2s ease-in-out 1s; /* Sayfa yüklendikten 1 sn sonra sallanır */
+            
+            /* FadeIn ve Swing efektlerini birleştirdik */
+            animation: fadeInUp 0.8s ease-out forwards, initialSwing 2s ease-in-out 1s;
         }
 
-        /* Masaüstünde kartın üzerine gelince hafif meyil verme */
+        /* Masaüstü için hafif hover derinliği */
         .card-container:hover:not(.is-flipped) {
             transform: rotateY(10deg);
         }
@@ -73,7 +88,7 @@
             transform: rotateY(180deg);
         }
 
-        /* Döndürme İkonu (Sağ Üst) */
+        /* Sağ üstteki döndürme ikonu */
         .flip-icon {
             position: absolute;
             top: 20px;
@@ -117,9 +132,9 @@
             color: white;
             border: none;
             font-size: 15px;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); filter: brightness(1.1); }
+        .btn:hover { transform: scale(1.05); filter: brightness(1.1); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .btn svg { fill: white; width: 20px; height: 20px; }
         
         .btn-save { background-color: var(--primary-blue); margin-bottom: 5px; }
@@ -161,18 +176,18 @@
             margin-bottom: 20px;
             font-size: 14px;
             color: var(--text-dark);
-            line-height: 1.4;
         }
         .info-item svg { fill: var(--primary-blue); width: 18px; flex-shrink: 0; }
 
         .flip-hint-bar {
             background: #f0f2f5;
-            padding: 10px;
+            padding: 12px;
             font-size: 11px;
             color: #777;
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: bold;
+            text-align: center;
         }
 
     </style>
@@ -250,7 +265,7 @@
 
 <script>
     function flipCard(event) {
-        // Eğer tıklanan yer bir buton veya link ise kartı döndürme
+        // Butona tıklandığında dönmeyi engelle
         if (event.target.closest('.btn')) return;
         
         const card = document.getElementById('card');
